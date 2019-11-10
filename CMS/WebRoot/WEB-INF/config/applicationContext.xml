@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:aop="http://www.springframework.org/schema/aop"
+         xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd">
+      <!--使用annotition说明-->
+       <context:annotation-config/>
+      <!--spring简化配置-->
+      <context:component-scan base-package="com"/>
+      
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location">  
+            <value>/WEB-INF/config/jdbc.properties</value>  
+        </property>  
+        <property name="fileEncoding" value="utf-8" />  
+  </bean>  
+      <!-- cp30数据源配置 -->
+  <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+  		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+   
+ 		<property name="jdbcUrl" value="${jdbcUrl}" />
+  		<property name="user" value="${user}" />
+  		<property name="password" value="${password}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<!--7.9小时不用丢弃-->
+		<property name="maxIdleTime" value="28440" />
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<property name="acquireIncrement" value="${acquireIncrement}" />
+  </bean>  
+
+  <!-- sessionFactory配置 -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+   		 <property name="dataSource" ref="myDataSource"/>
+   		 <property name="packagesToScan">
+	         <list>
+	               <value>com.model</value>
+	               <value>com.model.channelModel</value>
+	               <value>com.model.gm</value>
+	         </list>
+    	</property>
+    <property name="hibernateProperties">
+        <props>
+              <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+              <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+              <prop key = "hibernate.show_sql">${hibernate.show_sql}</prop>
+         </props>
+    </property>
+  </bean>
+    
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" scope="singleton"> 
+		<!--配置hibernateTemplate，在DaoImpl中set注入-->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+ 
+   <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+       <property name="sessionFactory" ref="sessionFactory"/>
+   </bean>
+
+  <tx:advice id="txAdvice" transaction-manager="txManager">
+	  <tx:attributes>
+	    <tx:method name="get*" read-only="true"/>
+	    <tx:method name="del*" propagation="REQUIRED"/>
+	    <tx:method name="update" propagation="REQUIRED"/>
+	    <tx:method name="save" propagation="REQUIRED"/>
+	  </tx:attributes>
+  </tx:advice>
+      
+  <aop:config>
+	  <aop:pointcut id="fooServiceOperation" expression="execution(public * lxg.servers.*.*(..))"/>
+	  <aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"/>
+  </aop:config>
+
+</beans>

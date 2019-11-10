@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>/show/index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<context-param>  
+        <param-name>contextConfigLocation</param-name>  
+        <param-value>WEB-INF/config/applicationContext.xml</param-value>  
+    </context-param>  
+	
+	
+	<!--系统过滤器-->
+	<filter>
+		<filter-name>filter</filter-name>
+		<filter-class>com.tool.UrlFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	   <filter-name>filter</filter-name>
+	   <url-pattern>/*</url-pattern> 
+	</filter-mapping>
+	
+	<!--spring监听器-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!--数据加载-->
+	<listener>
+		<listener-class>com.core.ApplicationInit</listener-class>
+	</listener>
+	
+	<!--property 加载-->
+	<listener>
+		<listener-class>com.core.ProManager</listener-class>
+	</listener>
+	
+	<!--游戏日志-->
+	<servlet>
+		<servlet-name>log</servlet-name>
+		<servlet-class>com.logic.gm.gamelog.ReceiLogAction</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>log</servlet-name>
+		<url-pattern>/log</url-pattern>
+	</servlet-mapping>
+	
+	<!--消息控制器-->
+	<servlet>
+		<servlet-name>console</servlet-name>
+		<servlet-class>com.core.Console</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>console</servlet-name>
+		<url-pattern>/request</url-pattern>
+	</servlet-mapping>
+	
+	<!-- FCK编辑器 -->
+    <servlet>
+      <servlet-name>Connector</servlet-name>
+        <servlet-class>
+          net.fckeditor.connector.ConnectorServlet
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+	
+ 	<servlet-mapping>
+      <servlet-name>Connector</servlet-name>
+      <url-pattern>
+        /plugin/fckeditor/editor/filemanager/connectors/*
+      </url-pattern>
+    </servlet-mapping>
+</web-app>
