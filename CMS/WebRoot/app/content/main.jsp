@@ -41,18 +41,18 @@
 <body>
 	<%
 		if(dirName == null || dirId == null || modelName == null || conList == null){ 
-			out.print("该栏目没有内容");   
+			out.print("no content in this directory");   
 			out.print("<hr>");
 		}else{
 	%>
 	<form action="request" method="get">
-	<label>当前目录：<%=dirName%></label>   <a href="request?port=<%=MessagePort.CONTENT_ADD1%>&dirId=<%=dirId %>">添加</a>
+	<label>Directory：<%=dirName%></label>   <a href="request?port=<%=MessagePort.CONTENT_ADD1%>&dirId=<%=dirId %>">Add</a>
 	<hr>
-		<label>查询</label>&nbsp;
+		<label>Search</label>&nbsp;
 		<%=search %><%=search %>
 		<input type="hidden" name = "port" value = "<%=MessagePort.CONTENT_SEARCH %>">&nbsp;&nbsp;&nbsp;
 		<input type="hidden" name = "dirId" value = "<%=dirId %>">&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="查询">&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="search">&nbsp;&nbsp;&nbsp;
 	</form>
 	<table  border="0" cellpadding="3" cellspacing="1" width="90%" align="" style="background-color: #b9d8f3;">
 		<%
@@ -77,7 +77,7 @@
 					out.print("<td>" + tableTitle.name() + "</td>");
 				}
 			}
-			out.print("<td>操作</td>");
+			out.print("<td>operation</td>");
 			out.print("</tr>");
 			
 		//列表
@@ -111,8 +111,8 @@
 				int id = idField.getInt(obj);
 				
 				out.print("<td>");
-				out.print("<a href= \"request?port=" + MessagePort.CONTENT_INFO + "&id=" + id + "&modelName=" + modelName + "\">编辑</a> ");
-				out.print("<a href= \"request?port=" + MessagePort.CONTENT_DEL + "&id=" + id + "&modelName=" + modelName + "\">删除</a>");
+				out.print("<a href= \"request?port=" + MessagePort.CONTENT_INFO + "&id=" + id + "&modelName=" + modelName + "\">modify</a> ");
+				//out.print("<a href= \"request?port=" + MessagePort.CONTENT_DEL + "&id=" + id + "&modelName=" + modelName + "\">删除</a>");
 				out.print("</td>");
 				
 				out.print("</tr>");

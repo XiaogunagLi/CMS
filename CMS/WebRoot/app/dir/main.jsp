@@ -35,15 +35,15 @@
 	</head>
 	<body>
 	
-		当前目录：<%= mainPro.getCurrentDirName() %>
-		<a href = "request?port=<%=MessagePort.DIRECTORY_ADD1%>&currentDirId=<%=mainPro.getCurrentDirId()%>">添加</a>
+		Directory：<%= mainPro.getCurrentDirName() %>
+		<a href = "request?port=<%=MessagePort.DIRECTORY_ADD1%>&currentDirId=<%=mainPro.getCurrentDirId()%>">Add</a>
 		<hr>
 		<table  border="0" cellpadding="3" cellspacing="1" width="90%" align="" style="background-color: #b9d8f3;">
 			<tr style="text-align: left; COLOR: #204648; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 				<td>ID</td>
-				<td>名称</td>
-				<td>模板</td>
-				<td>操作</td>
+				<td>Name</td>
+				<td>Template</td>
+				<td>Operation</td>
 			</tr>
 		<%
 			if(dirList != null){

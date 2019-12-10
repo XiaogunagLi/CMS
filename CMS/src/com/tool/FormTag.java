@@ -214,7 +214,7 @@ public class FormTag {
 	public static String getSearchTag(Class<?> clazz, String fieldName[], String fieldValue[]){
 		StringBuffer str = new StringBuffer();
 		str.append("<select name = \"field\">");
-		str.append("<option value=\"\">请选择</option>");
+		str.append("<option value=\"\">option</option>");
 		
 		//父类属性
 		Field fieldParent[] = clazz.getSuperclass().getDeclaredFields();
@@ -266,30 +266,30 @@ public class FormTag {
 		int b = 0;
 		int n = 0;
 		
-		page.append("共");
+		page.append("total");
 		page.append(allCount);
-		page.append("条&nbsp;&nbsp;&nbsp;&nbsp;第");
+		page.append("&nbsp;&nbsp;&nbsp;&nbsp;");
 		page.append(next);
 		page.append("/");
 		page.append(allPage);
-		page.append("页&nbsp;&nbsp;&nbsp;&nbsp;");
+		page.append("&nbsp;&nbsp;&nbsp;&nbsp;");
 		
 		if(allPage <= 1){
-			before = "首页&nbsp;&nbsp;&nbsp;&nbsp;上一页&nbsp;&nbsp;&nbsp;&nbsp;";
-			after = "下一页&nbsp;&nbsp;&nbsp;&nbsp;尾页";
+			before = "First&nbsp;&nbsp;&nbsp;&nbsp;Back&nbsp;&nbsp;&nbsp;&nbsp;";
+			after = "Next&nbsp;&nbsp;&nbsp;&nbsp;Last";
 		}else if(next <= 1){
 			n = 2; 
-			before = "首页&nbsp;&nbsp;&nbsp;&nbsp;上一页&nbsp;&nbsp;&nbsp;&nbsp;";
-			after = "<a href = " + action + "&{0}>下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{1}>尾页</a>";
+			before = "First&nbsp;&nbsp;&nbsp;&nbsp;Back&nbsp;&nbsp;&nbsp;&nbsp;";
+			after = "<a href = " + action + "&{0}>Next</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{1}>Last</a>";
 		}else if(next >= allPage){
 			b = allPage - 1;
-			before = "<a href = " + action + "&{1}>首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{0}>上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;";
-			after = "下一页&nbsp;&nbsp;&nbsp;&nbsp;尾页";
+			before = "<a href = " + action + "&{1}>First</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{0}>Back</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+			after = "Next&nbsp;&nbsp;&nbsp;&nbsp;Last";
 		}else{
 			b = next - 1;
 			n = next + 1;
-			before = "<a href = " + action + "&{1}>首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{0}>上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;";
-			after = "<a href = " + action + "&{0}>下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{1}>尾页</a>";
+			before = "<a href = " + action + "&{1}>First</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{0}>Back</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+			after = "<a href = " + action + "&{0}>Next</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href = " + action + "&{1}>Last</a>";
 		}
 		
 		

@@ -14,21 +14,22 @@ import com.core.annotation.TextAreaTag;
 import com.model.Sys_BaseModel;
 
 @Entity
-@Table(name = "m_default")
-public class Model_Default extends Sys_BaseModel implements Serializable{
+@Table(name = "m_blog")
+public class Model_Blog extends Sys_BaseModel implements Serializable{
 	public static final long serialVersionUID = -5464414531499850045L;
-	@TableTitle(name = "标题")
-	@InputTag(label = "标题", name = "title", type = "text", value = "")
+	@TableTitle(name = "Title")
+	@InputTag(label = "Title", name = "title", type = "text", value = "")
 	public String title;
 	
-	@TextAreaTag(cols = "70", label = "描述", name = "desc_", rows = "3", value = "")
+	@TableTitle(name = "Date")
+	@InputTag(label = "Date", name = "date", type = "text", value = "")
+	public String date;
+	
+	@TextAreaTag(cols = "70", label = "Description", name = "desc_", rows = "3", value = "")
 	public String desc_;
 	
-	@TextAreaTag(cols = "70", label = "内容", name = "content", rows = "10", value = "")
+	@TextAreaTag(cols = "70", label = "content", name = "content", rows = "10", value = "")
 	public String content;
-	
-	@InputTag(label = "图片", name = "upload", type = "file", value = "")
-	public String upload;
 
 	public String getTitle() {
 		return title;
@@ -55,13 +56,13 @@ public class Model_Default extends Sys_BaseModel implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public String getUpload() {
-		return upload;
+	@Type(type = "text")
+	public String getDate() {
+		return date;
 	}
 
-	public void setUpload(String upload) {
-		this.upload = upload;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 }

@@ -86,7 +86,7 @@ public class DirManager {
 		dirTree += "d.config.useCookies = false;";
 		dirTree += "d.config.useStatusText = true;";
 		dirTree += "d.config.closeSameLevel = true;";
-		dirTree += "d.add(0, -1, \"根目录\",\"" + type + "\", \"根目录\", \"main\");";
+		dirTree += "d.add(0, -1, \"Root\",\"" + type + "\", \"Root\", \"main\");";
 		dirTree += sb.toString();
 		String toHtml = "<script type=\"text/javascript\">function treeshow() {"
 				+ dirTree + " document.write(d)}treeshow();</script>";

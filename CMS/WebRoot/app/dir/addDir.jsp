@@ -27,20 +27,20 @@
 
 	<body>
 			<form action="request?port=<%=MessagePort.DIRECTORY_ADD2%>" method="post">
-				当前目录：<%=directory.getDisplayName()%>
+				Direcotry：<%=directory.getDisplayName()%>
 				<hr>
 				<input type="hidden" name="currentDirId"  value="<%=directory.getId()%>">
 				<table   border="0" cellpadding="3" cellspacing="1" width="90%"  style="background-color: #b9d8f3;">
 				
 				 <tr style="text-align: left; COLOR: #204648; BACKGROUND-COLOR: #F4FAFF;">
-					<td>名称</td>
+					<td>Name</td>
 					<td><input type="text" name="displayName"></td>
 				</tr>
 				<tr style="text-align: left; COLOR: #204648; BACKGROUND-COLOR: #F4FAFF;">
-					<td>模型</td>
+					<td>Template</td>
 					<td>
 						<select name="model">
-							<option>选择模板</option>
+							<option>options</option>
 							<%
 								for(int i=0; i<modelList.size(); i++){
 									String modelName = (String)modelList.get(i);

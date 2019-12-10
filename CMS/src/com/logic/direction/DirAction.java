@@ -48,7 +48,7 @@ public class DirAction{
 		if (directory == null) {
 			directory = new Sys_Directory();
 			directory.setId(0);
-			directory.setDisplayName("根目录");
+			directory.setDisplayName("Root");
 		}
 		request.setAttribute("currentDir", directory);
 		List<String> modelList = (List<String>) request.getSession().getServletContext().getAttribute("modelList");
@@ -135,7 +135,7 @@ public class DirAction{
 		//获取当前目录实例
 		Sys_Directory currentDir = DirManager.getInstance().getDirById(CrrentDirId);
 		if(currentDir == null){
-			currentDirName = "根目录";
+			currentDirName = "Root";
 		}else{
 			currentDirName = currentDir.getDisplayName();
 		}
