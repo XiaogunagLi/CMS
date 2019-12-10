@@ -23,7 +23,7 @@ import com.tool.FormTag;
 import com.tool.Request;
 
 public class ContentAction {
-	private int pageSize = 5;
+	private int pageSize = 15;
 
 	//ÄÚÈÝÃæ°å
 	@Port(port = MessagePort.CONTENT)

@@ -266,7 +266,7 @@ public class FormTag {
 		int b = 0;
 		int n = 0;
 		
-		page.append("total");
+		page.append("total&nbsp;");
 		page.append(allCount);
 		page.append("&nbsp;&nbsp;&nbsp;&nbsp;");
 		page.append(next);
