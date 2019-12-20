@@ -30,14 +30,12 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="app/css/main.css" type="text/css"></link>
-		<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
-		<script type="text/javascript" src="plugin/fckeditor/fckeditor.js"></script>
+		<script src="plugin/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
 			window.onload = function() {
-				var sBasePath = "<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/plugin/fckeditor/" %>"
-				var oFCKeditor = new FCKeditor( 'content' ) ;
-				oFCKeditor.BasePath	= sBasePath ;
-				oFCKeditor.ReplaceTextarea() ;
+				CKEDITOR.replace( 'content' , {
+				    filebrowserBrowseUrl: '/plugin/ckupload/fileView.html',
+				});
 		 }
 	    </script>
 	</head>

@@ -61,19 +61,18 @@
 		<url-pattern>/request</url-pattern>
 	</servlet-mapping>
 	
-	<!-- FCK编辑器 -->
-    <servlet>
-      <servlet-name>Connector</servlet-name>
-        <servlet-class>
-          net.fckeditor.connector.ConnectorServlet
-      </servlet-class>
-      <load-on-startup>1</load-on-startup>
-    </servlet>
-	
- 	<servlet-mapping>
-      <servlet-name>Connector</servlet-name>
-      <url-pattern>
-        /plugin/fckeditor/editor/filemanager/connectors/*
-      </url-pattern>
-    </servlet-mapping>
+	<!--ckEditor-->
+	<context-param>  
+        <param-name>fileDir</param-name>  
+        <param-value>ckUpload</param-value>  
+    </context-param> 
+	<servlet>
+		<servlet-name>ckeditor</servlet-name>
+		<servlet-class>com.logic.fck.Upload</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ckeditor</servlet-name>
+		<url-pattern>/ck</url-pattern>
+	</servlet-mapping>
 </web-app>

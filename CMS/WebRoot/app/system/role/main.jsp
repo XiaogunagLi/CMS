@@ -40,7 +40,7 @@
 		<link rel="stylesheet" href="app/css/main.css" type="text/css"></link>
 		<link rel="stylesheet" href="js/dtree/dtree.css" type="text/css"></link>
 		<script type="text/javascript" src="js/dtree/dtree.js"></script>
-		<script language="JavaScript" src="app/js/jquery.js" type="text/javascript"></script>
+		<script language="JavaScript" src="plugin/jquery/jquery.js" type="text/javascript"></script>
 </head>
 
 <body>

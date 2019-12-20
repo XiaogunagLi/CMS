@@ -31,20 +31,19 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<script type="text/javascript" src="plugin/fckeditor/fckeditor.js"></script>
+		<script src="plugin/ckeditor/ckeditor.js"></script>
 		<link rel="stylesheet" href="app/css/main.css" type="text/css"></link>
 		<script type="text/javascript">
 			window.onload = function() {
-				var sBasePath = "<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/plugin/fckeditor/" %>"
-				var oFCKeditor = new FCKeditor( 'content' ) ;
-				oFCKeditor.BasePath	= sBasePath ;
-				oFCKeditor.ReplaceTextarea() ;
+				CKEDITOR.replace( 'content' , {
+				    filebrowserBrowseUrl: '/plugin/ckupload/fileView.html',
+				});
 		 }
 	    </script>
 	</head>
 	<body>
 		<form action="request"  enctype="multipart/form-data" method="post">
-			当前目录：<%=dirName%>
+			current dir：<%=dirName%>
 			<hr/>
 			<input type="hidden" name="port"  value="<%=MessagePort.CONTENT_UPDATE%>">
 			<input type="hidden" name="modelName"  value="<%=modelName%>">
@@ -68,7 +67,7 @@
 				<tr style="text-align: left; COLOR: #204648; BACKGROUND-COLOR: #F4FAFF;">
 					<td><input type="submit" value="保存"></td>
 					<td>
-						<a href="request?port=<%=MessagePort.CONTENT_MAIN%>&currentDirId=<%=dirId%>">返回</a>
+						<a href="request?port=<%=MessagePort.CONTENT_MAIN%>&currentDirId=<%=dirId%>">back</a>
 					</td>
 				</tr>
 			</table>

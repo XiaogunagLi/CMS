@@ -1,0 +1,87 @@
+<html id = "app" ng-app="imgUpload">
+  <head>
+    <title>images</title>
+	<base href="/">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    
+    <link rel="stylesheet" type="text/css" href="plugin/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plugin/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="plugin/ckupload/ckupload.css">
+    
+    <script src="plugin/jquery/jquery.js"></script>
+    <script src="plugin/angular/angular.min.js"></script>
+    <script src="plugin/dtree/dtree.js"></script>
+    <script src="plugin/ckupload/ckupload.js"></script>
+  </head>
+  <style>
+  		#imgList{
+  			max-height:400px;
+  			margin:10px;
+		    overflow-y:auto;
+  		}
+  		#tree{
+  			height:400px;
+  			padding-left:10px;
+  			padding-top:10px;
+  		}
+  		
+  </style>
+  <body ng-controller="imgAction">
+  <div class="card">
+  	<div class="card-header  alert alert-secondary text-center">Image Upload</div>
+  	
+  	<div class="card-body" style="padding-top:5px;padding-bottom:5px;">
+  		<div class="row">
+		  <div class="col-sm-3"  style="padding:5px;">
+		  	<div class="card" id = "tree">
+		  		
+		    </div>
+		  
+		  </div>
+		  
+		  <div class="col-sm-9"   style="padding:5px;">
+		 	 <div class="card" style="height:400px;">
+		 	 	<div class="row" id="imgList">
+		 	 		<div class="col-sm-2"  style="padding:5px;" ng-repeat="src in images">
+		 	 			<img ng-src="/{{src}}" ng-click="imgClick()" width="100" height="100">
+		 	 		</div>
+		        </div>
+		     </div>
+		  </div>
+		  
+		</div>
+	</div>
+	
+	
+	<div class="card-footer">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="input-group"  id="create">
+				  <input type="text" class="form-control" placeholder="input folder name" ng-model="dirName">
+				  <div class="input-group-append">
+				    <button class="btn alert-secondary" type="button"  ng-click="createDir()">createDir</button>
+				  </div>
+				</div>
+			</div>
+			
+			<div class="col-sm-8">
+				<div class="row">
+					<div class="col-sm-8 text-left">
+						<button class="btn alert-secondary" type="button" ng-click="chooseFile()">choose image</button>
+						<input type="file" file-model="fileToUpload" style="display:none;" id="file">
+						<label>{{fileName}}</label>
+					</div>
+					<div class="col-sm-4 text-right">
+						<button  id="upload" class="btn alert-secondary" type="button" ng-click="sendFile()">upload</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+  </div>
+  </body>
+</html>

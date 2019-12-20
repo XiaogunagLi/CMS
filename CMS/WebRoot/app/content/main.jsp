@@ -19,8 +19,6 @@
 	String search = (String)request.getAttribute("search");
 	String partPage = (String)request.getAttribute("partPage");
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<base href="<%=basePath%>">
@@ -33,9 +31,9 @@
 		<meta http-equiv="description" content="This is my page">
 
 		<link rel="stylesheet" href="app/css/main.css" type="text/css"></link>
-		<link rel="stylesheet" href="js/dtree/dtree.css" type="text/css"></link>
-		<script type="text/javascript" src="js/dtree/dtree.js"></script>
-		<script language="JavaScript" src="app/js/jquery.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="plugin/dtree/dtree.css" type="text/css"></link>
+		<script type="text/javascript" src="plugin/dtree/dtree.js"></script>
+		<script language="JavaScript" src="plugin/jquery/jquery.js" type="text/javascript"></script>
 </head>
 
 <body>

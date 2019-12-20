@@ -27,74 +27,45 @@ public class Console extends HttpServlet{
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("ISO8859_1");
 		
+		String portStr = request.getParameter("port");
 		List<FileItem> items = null;
-		try {
-			items = upload.parseRequest(request);
+		if(portStr == null){
+			try {
+				items = upload.parseRequest(request);
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
 			Iterator iter = items.iterator();
-			
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
-				if (item.isFormField()) { // 如果是表单域 ，就是非文件上传元素
-					String name = item.getFieldName(); // 获取name属�?的�?
-					String value = item.getString(); // 获取value属�?的�?
+				if (item.isFormField()) {
+					String name = item.getFieldName(); 
+					String value = item.getString();
 					String type = item.getContentType();
 					if("port".equals(name)){
-					    String	port = value;
-					    System.out.println("message Port:" + port);
-						HttpSession session = request.getSession();
-						int PORT = Integer.parseInt(port);
-						if(session.getAttribute("user") == null && !String.valueOf(MessagePort.LOGIN).equals(port)&& PORT < 500){
-							response.sendRedirect("request?port=" + MessagePort.LOGIN);
-							return;
-						}
-						
-						//权限检测
-						if(session.getAttribute("pc") != null){
-							PowerCheckManager pc = (PowerCheckManager) session.getAttribute("pc");
-							if(!pc.check(session, PORT)){
-								return;
-							}
-						}
-						
-						try {
-							Method method = CollectionPath.methodMap.get(PORT);
-							method.invoke(CollectionPath.objMap.get(PORT), request, response, items);
-						} catch (Exception e) {
-							System.out.println("消息解析异常:" + port + "  " + e.getMessage());
-							e.printStackTrace();
-						}
-						break;
+						portStr = value;
 					}
 				}
 			}
-		} catch (FileUploadException e) {
-			String port = request.getParameter("port");
-			System.out.println("message Port:" + port);
-			HttpSession session = request.getSession();
-			int PORT = Integer.parseInt(port);
-			if(session.getAttribute("user") == null && !String.valueOf(MessagePort.LOGIN).equals(port)&& PORT < 500){
-				response.sendRedirect("request?port=" + MessagePort.LOGIN);
-				return;
-			}
-			
-			//权限检测
-			if(session.getAttribute("pc") != null){
-				PowerCheckManager pc = (PowerCheckManager) session.getAttribute("pc");
-				if(!pc.check(session, PORT)){
-					return;
-				}
-			}
-			
-			
-			try {
-				Method method = CollectionPath.methodMap.get(PORT);
-				method.invoke(CollectionPath.objMap.get(PORT), request, response);
-			} catch (Exception e1) {
-				System.out.println("消息解析异常:" + port + "  " + e.getMessage());
-				e1.printStackTrace();
-			}
-		} 
+		}
+		int port = Integer.valueOf(portStr);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null && MessagePort.LOGIN != port){
+			response.sendRedirect("request?port=" + MessagePort.LOGIN);
+			return;
+		}
 		
+		try {
+			Method method = CollectionPath.methodMap.get(port);
+			if(items == null){
+				method.invoke(CollectionPath.objMap.get(port), request, response);
+			}else{
+				method.invoke(CollectionPath.objMap.get(port), request, response, items);
+			}
+		} catch (Exception e) {
+			response.sendRedirect("request?port=" + MessagePort.LOGIN);
+			System.out.println("消息解析异常:" + port + "  " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
-	
 }

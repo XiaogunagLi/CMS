@@ -19,7 +19,7 @@ String errorStr = (String)request.getAttribute("error");
 	<meta http-equiv="expires" content="0"/>    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
 	<meta http-equiv="description" content="This is my page"/>
-	<script language="JavaScript" src="app/js/jquery.js" type="text/javascript"></script>
+	<script language="JavaScript" src="plugin/jquery/jquery.js" type="text/javascript"></script>
 	<script>
 	 $(document).ready(function(){
 	    $("#login").css({ 

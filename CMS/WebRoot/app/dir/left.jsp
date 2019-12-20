@@ -19,8 +19,8 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 
-		<link rel="stylesheet" href="app/js/dtree/dtree.css" type="text/css"></link>
-		<script type="text/javascript" src="app/js/dtree/dtree.js">
+		<link rel="stylesheet" href="plugin/dtree/dtree.css" type="text/css"></link>
+		<script type="text/javascript" src="plugin/dtree/dtree.js">
 </script>
 	</head>
 
