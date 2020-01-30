@@ -9,6 +9,7 @@ app.controller('imgAction', [ "$scope", "$location", "sendHttp", "mainAction",fu
 	  $scope.fileName = "";
 	  $scope.dirName = "";
 	  $scope.curDir = "ckUpload";
+	  $scope.curFile = null;
 	  $scope.images = [];
 	  $scope.chooseFile = function() {
 		 $('#file').click();
@@ -36,13 +37,10 @@ app.directive("fileModel", [ "$parse", function($parse) {
 	return {
 		restrict : "A",
 		link : function(scope, element, attrs) {
-			var model = $parse(attrs.fileModel);
-			var modelSetter = model.assign;
-
 			element.bind("change", function() {
 				scope.$apply(function() {
-					modelSetter(scope, element[0].files[0]);
 					scope.fileName = element[0].files[0].name;
+					scope.curFile = element;
 				})
 			})
 		}
@@ -113,7 +111,7 @@ app.service("mainAction", ["sendHttp", function(sendHttp){
 			alert("choose image");
 			return;
 		}
-		var file = scope.fileToUpload;
+		var file = scope.curFile[0].files[0];
 	    if ( !file ){
 	    	return;
 	    }
@@ -124,6 +122,7 @@ app.service("mainAction", ["sendHttp", function(sendHttp){
 	    sendHttp.sendPost(fd, function(){
 	    	that.imgList(scope.curDir, scope);
 	    	scope.fileName = "";
+	    	scope.curFile.val(null);
 	    });
 	}
 	
